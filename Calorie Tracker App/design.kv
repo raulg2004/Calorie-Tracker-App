@@ -1,0 +1,726 @@
+ScreenManager:
+    WelcomeScreen:
+    SignInScreen:
+    VerifyScreen:
+    LoginScreen:
+    HomeScreen:
+    CameraScreen:
+
+<CustomButton@Button>:
+    background_color: 0, 0, 0, 0
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (0.2, 0.6, 1, 1) if self.state == 'normal' else (0.1, 0.5, 0.9, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [20]
+    font_size: '18sp'
+    bold: True
+
+<CustomTextInput@TextInput>:
+    multiline: False
+    padding: [20, 20]
+    size_hint_y: None
+    height: '50dp'
+    background_color: 0, 0, 0, 0
+    foreground_color: 0.2, 0.2, 0.2, 1
+    cursor_color: 0.2, 0.6, 1, 1
+    font_size: '18sp'
+
+<WelcomeScreen>:
+    name: 'welcome'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '20dp'
+        padding: '40dp'
+        canvas.before:
+            Color:
+                rgba: 0.95, 0.95, 0.95, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Widget:
+            size_hint_y: 0.3
+
+        Label:
+            text: 'Welcome to Calorie Tracker'
+            font_size: '32sp'
+            size_hint_y: None
+            height: '60dp'
+            color: 0.2, 0.2, 0.2, 1
+            bold: True
+
+        Widget:
+            size_hint_y: 0.1
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: '150dp'
+            spacing: '20dp'
+            padding: '0dp'
+
+            CustomButton:
+                text: 'Sign Up'
+                size_hint_y: None
+                height: '50dp'
+                on_release: root.manager.current = 'sign_in'
+
+            CustomButton:
+                text: 'Log In'
+                size_hint_y: None
+                height: '50dp'
+                on_release: root.manager.current = 'login'
+
+            CustomButton:
+                text: 'Delete Account'
+                size_hint_y: None
+                height: '50dp'
+                on_release: root.manager.current = 'delete_account'
+
+        Widget:
+            size_hint_y: 0.3
+
+<SignInScreen>:
+    name: 'sign_in'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '20dp'
+        padding: '40dp'
+        canvas.before:
+            Color:
+                rgba: 0.95, 0.95, 0.95, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Widget:
+            size_hint_y: 0.2 
+
+        Label:
+            text: 'Create Account'
+            font_size: '32sp'
+            size_hint_y: None
+            height: '60dp'
+            color: 0.2, 0.2, 0.2, 1
+            bold: True
+
+        # Email Input
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            canvas.before:
+                Color:
+                    rgba: 0.8, 0.8, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15]
+
+            TextInput:
+                id: email_input
+                hint_text: 'Email'
+                background_normal: ''
+                background_active: ''
+                background_color: 0, 0, 0, 0
+                foreground_color: 0, 0, 0, 1
+                padding: [20, 20]
+                cursor_color: 0, 0, 0, 1
+                font_size: '18sp'
+
+        # Username Input
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            canvas.before:
+                Color:
+                    rgba: 0.8, 0.8, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15]
+
+            TextInput:
+                id: username_input
+                hint_text: 'Username'
+                background_normal: ''
+                background_active: ''
+                background_color: 0, 0, 0, 0
+                foreground_color: 0, 0, 0, 1
+                padding: [20, 20]
+                cursor_color: 0, 0, 0, 1
+                font_size: '18sp'
+
+        # Password Input
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            canvas.before:
+                Color:
+                    rgba: 0.8, 0.8, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15]
+
+            TextInput:
+                id: password_input
+                hint_text: 'Password'
+                password: True
+                background_normal: ''
+                background_active: ''
+                background_color: 0, 0, 0, 0
+                foreground_color: 0, 0, 0, 1
+                padding: [20, 20]
+                cursor_color: 0, 0, 0, 1
+                font_size: '18sp'
+
+        # Confirm Password Input
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            canvas.before:
+                Color:
+                    rgba: 0.8, 0.8, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15]
+
+            TextInput:
+                id: confirm_password_input
+                hint_text: 'Confirm Password'
+                password: True
+                background_normal: ''
+                background_active: ''
+                background_color: 0, 0, 0, 0
+                foreground_color: 0, 0, 0, 1
+                padding: [20, 20]
+                cursor_color: 0, 0, 0, 1
+                font_size: '18sp'
+
+        CustomButton:
+            text: 'Sign Up'
+            size_hint_y: None
+            height: '50dp'
+            on_release: root.sign_in()
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '50dp'
+            spacing: '10dp'
+
+            Label:
+                text: 'Already have an account?'
+                color: 0.2, 0.2, 0.2, 1
+
+            Button:
+                text: 'Log In'
+                background_color: 0, 0, 0, 0
+                color: 0.2, 0.6, 1, 1
+                size_hint_x: None
+                width: '100dp'
+                on_release: root.manager.current = 'login'
+
+        Widget:
+            size_hint_y: 0.2
+
+<LoginScreen>:
+    name: 'login'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '20dp'
+        padding: '40dp'
+        canvas.before:
+            Color:
+                rgba: 0.95, 0.95, 0.95, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Widget:
+            size_hint_y: 0.2 
+
+        Label:
+            text: 'Welcome Back'
+            font_size: '32sp'
+            size_hint_y: None
+            height: '60dp'
+            color: 0.2, 0.2, 0.2, 1
+            bold: True
+
+        # Username or Email Input
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            canvas.before:
+                Color:
+                    rgba: 0.8, 0.8, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15]
+
+            TextInput:
+                id: username_email_input
+                hint_text: 'Username or Email'
+                background_normal: ''
+                background_active: ''
+                background_color: 0, 0, 0, 0
+                foreground_color: 0, 0, 0, 1
+                padding: [20, 20]
+                cursor_color: 0, 0, 0, 1
+                font_size: '18sp'
+
+        # Password Input
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            canvas.before:
+                Color:
+                    rgba: 0.8, 0.8, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15]
+
+            TextInput:
+                id: password_input
+                hint_text: 'Password'
+                password: True
+                background_normal: ''
+                background_active: ''
+                background_color: 0, 0, 0, 0
+                foreground_color: 0, 0, 0, 1
+                padding: [20, 20]
+                cursor_color: 0, 0, 0, 1
+                font_size: '18sp'
+
+        CustomButton:
+            text: 'Log In'
+            size_hint_y: None
+            height: '50dp'
+            on_release: root.log_in()
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '50dp'
+            spacing: '10dp'
+
+            Label:
+                text: "Don't have an account?"
+                color: 0.2, 0.2, 0.2, 1
+
+            Button:
+                text: 'Sign Up'
+                background_color: 0, 0, 0, 0
+                color: 0.2, 0.6, 1, 1
+                size_hint_x: None
+                width: '100dp'
+                on_release: root.manager.current = 'sign_in'
+
+        Widget:
+            size_hint_y: 0.2 
+
+<DeleteAccountScreen>:
+    name: 'delete_account'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '20dp'
+        padding: '40dp'
+        canvas.before:
+            Color:
+                rgba: 0.95, 0.95, 0.95, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Widget:
+            size_hint_y: 0.2
+
+        Label:
+            text: 'Delete Account'
+            font_size: '32sp'
+            size_hint_y: None
+            height: '60dp'
+            color: 0.2, 0.2, 0.2, 1
+            bold: True
+
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            canvas.before:
+                Color:
+                    rgba: 0.8, 0.8, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15]
+
+            TextInput:
+                id: username_email_input
+                hint_text: 'Username or Email'
+                background_normal: ''
+                background_active: ''
+                background_color: 0, 0, 0, 0
+                foreground_color: 0, 0, 0, 1
+                padding: [20, 20]
+                cursor_color: 0, 0, 0, 1
+                font_size: '18sp'
+
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            canvas.before:
+                Color:
+                    rgba: 0.8, 0.8, 0.8, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15]
+
+            TextInput:
+                id: password_input
+                hint_text: 'Password'
+                password: True
+                background_normal: ''
+                background_active: ''
+                background_color: 0, 0, 0, 0
+                foreground_color: 0, 0, 0, 1
+                padding: [20, 20]
+                cursor_color: 0, 0, 0, 1
+                font_size: '18sp'
+
+        CustomButton:
+            text: 'Delete Account'
+            size_hint_y: None
+            height: '50dp'
+            on_release: root.confirm_delete_account()
+
+        CustomButton:
+            text: 'Back'
+            size_hint_y: None
+            height: '50dp'
+            on_release: app.root.current = 'welcome'
+
+        Widget:
+            size_hint_y: 0.2
+
+<ConfirmDeletePopup>:
+    title: 'Confirm Delete'
+    size_hint: 0.8, 0.5
+    auto_dismiss: False
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '20dp'
+        padding: '20dp'
+
+        Label:
+            text: 'Are you sure you want to delete this account? This action is permanent.'
+
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            spacing: '20dp'
+
+            Button:
+                text: 'Cancel'
+                on_release: root.dismiss()
+
+            Button:
+                text: 'Delete'
+                on_release: root.delete_account()
+
+<VerifyScreen>:
+    name: 'verify'
+    canvas.before:
+        Color:
+            rgba: 0.95, 0.95, 0.95, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '20dp'
+        padding: '40dp'
+
+        Widget:
+            size_hint_y: 0.2
+
+        Label:
+            text: 'Verify Your Email'
+            font_size: '32sp'
+            size_hint_y: None
+            height: '60dp'
+            color: 0.2, 0.2, 0.2, 1
+            bold: True
+
+        Label:
+            text: 'Please enter the verification code sent to your email'
+            color: 0.2, 0.2, 0.2, 1
+            size_hint_y: None
+            height: '40dp'
+
+        CustomTextInput:
+            id: verification_code_input
+            hint_text: 'Verification Code'
+
+        CustomButton:
+            text: 'Verify'
+            size_hint_y: None
+            height: '50dp'
+            on_release: root.verify()
+
+        Widget:
+            size_hint_y: 0.2
+
+<HomeScreen>:
+    name: "home"
+    calories_text: f"{root.calories_consumed} calories / {root.daily_calorie_limit}"
+    current_weight_text: f"Current Weight: {root.current_weight} kg"
+    goal_weight_text: f"Goal Weight: {root.goal_weight} kg"
+
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: root.bg_color
+            Rectangle:
+                pos: self.pos 
+                size: self.size
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '48dp'
+            padding: [10, 10, 10, 10]
+
+            Label:
+                text: root.current_weight_text
+                color: root.text_color
+                size_hint_x: 0.5
+
+            Label:
+                text: root.goal_weight_text
+                color: root.text_color
+                size_hint_x: 0.5
+
+        Label:
+            text: "CALORIE TRACKER"
+            font_size: 24
+            size_hint_y: 0.1
+            color: root.text_color
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.9
+            padding: 20
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.5
+
+                Label:
+                    text: root.calories_text
+                    font_size: 24
+                    color: root.text_color
+
+            GridLayout:
+                cols: 2
+                size_hint_y: 0.5
+
+                Button:
+                    text: "Add Food"
+                    on_release: root.show_food_input()
+                    background_color: root.button_bg_color
+                    color: root.button_text_color
+                
+                Button:
+                    text: "Weight Goal"
+                    on_release: root.show_weight_goal()
+                    background_color: root.button_bg_color
+                    color: root.button_text_color
+                
+                Button:
+                    text: "Take Photo"
+                    on_release: root.go_to_camera()
+                    background_color: root.button_bg_color
+                    color: root.button_text_color
+                
+                Button:
+                    text: "Settings"
+                    on_release: root.show_settings()
+                    background_color: root.button_bg_color
+                    color: root.button_text_color
+
+<FoodInputPopup>:
+    orientation: 'vertical'
+    food: food_input
+    grams: grams_input
+    calories: calories_input
+    
+    Label:
+        text: "Enter Food, Grams, and Calories"
+        size_hint_y: None
+        height: '48dp'
+    
+    TextInput:
+        id: food_input
+        hint_text: "Food"
+    
+    TextInput:
+        id: grams_input
+        hint_text: "Grams"
+        input_filter: 'int'
+    
+    TextInput:
+        id: calories_input
+        hint_text: "Calories"
+        input_filter: 'int'
+    
+    Button:
+        id: submit_button
+        text: "Submit"
+        on_release: root.submit()
+        
+<WeightGoalPopup>:
+    orientation: 'vertical'
+    current_weight: current_weight_input
+    goal_weight: goal_weight_input
+    
+    Label:
+        text: "Enter Current and Goal Weight"
+        size_hint_y: None
+        height: '48dp'
+    
+    TextInput:
+        id: current_weight_input
+        hint_text: "Current Weight"
+        input_filter: 'int'
+    
+    TextInput:
+        id: goal_weight_input
+        hint_text: "Goal Weight"
+        input_filter: 'int'
+    
+    Button:
+        id: submit_button
+        text: "Submit"
+        on_release: root.submit(self)
+
+<DailyLimitPopup>:
+    daily_limit_input: daily_limit_input
+    orientation: 'vertical'
+
+    Label:
+        text: "Enter new daily calorie limit:"
+
+    TextInput:
+        id: daily_limit_input
+        multiline: False
+        input_filter: 'int'
+
+    Button:
+        text: "Submit"
+        on_press: root.submit()
+
+<CameraScreen>:
+    name: "camera"
+    
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        # Top toolbar
+        BoxLayout:
+            size_hint_y: None
+            height: "50dp"
+            padding: "10dp"
+            spacing: "10dp"
+            canvas.before:
+                Color:
+                    rgba: 0.1, 0.1, 0.1, 0.9
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Button:
+                text: "Back"
+                size_hint_x: None
+                width: "80dp"
+                on_release: root.go_back()
+                background_color: 0.3, 0.3, 0.3, 1
+
+            Widget:
+                size_hint_x: 0.4
+
+            Button:
+                text: "Flash"
+                size_hint_x: None
+                width: "80dp"
+                on_release: root.toggle_flash()
+                background_color: root.flash_button_color
+
+            Button:
+                text: "View Photos"
+                size_hint_x: None
+                width: "100dp"
+                on_release: root.view_photos()
+                background_color: 0.3, 0.3, 0.3, 1
+
+        # Camera preview
+        Camera:
+            id: camera
+            resolution: (1280, 720)
+            play: True
+            allow_stretch: True
+            keep_ratio: True
+
+        # Bottom controls
+        BoxLayout:
+            size_hint_y: None
+            height: "100dp"
+            padding: "20dp"
+            spacing: "20dp"
+            canvas.before:
+                Color:
+                    rgba: 0.1, 0.1, 0.1, 0.9
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Widget:
+                size_hint_x: 0.3
+
+            # Capture button
+            Button:
+                size_hint: None, None
+                size: "80dp", "80dp"
+                background_color: 0, 0, 0, 0
+                on_release: root.capture() if root.camera_ready else None
+                disabled: not root.camera_ready
+                canvas.before:
+                    Color:
+                        rgba: (1, 1, 1, 1) if not self.disabled else (0.5, 0.5, 0.5, 1)
+                    Ellipse:
+                        size: self.size
+                        pos: self.pos
+                    Color:
+                        rgba: (0, 0, 0, 1) if not self.disabled else (0.3, 0.3, 0.3, 1)
+                    Ellipse:
+                        size: self.width - 10, self.height - 10
+                        pos: self.x + 5, self.y + 5
+
+            Widget:
+                size_hint_x: 0.3
